@@ -2,11 +2,11 @@ import Aoc25.Utils
 
 open System Std.Internal.Parsec.String.Parser
 
-namespace DayXX
+namespace Day01
 
-def testinput1 : FilePath := "input_XX_test1"
-def testinput2 : FilePath := "input_XX_test2"
-def realinput : FilePath := "input_XX"
+def testinput1 : FilePath := "input_01_test1"
+def testinput2 : FilePath := "input_01_test2"
+def realinput : FilePath := "input_01"
 
 /-
 PART 1:
@@ -34,4 +34,4 @@ def secondPart (input : FilePath) : IO Nat := do
 --#eval secondPart testinput2           --(ans: )
 --#eval secondPart realinput           --(ans: )
 
-end DayXX
+end Day01
