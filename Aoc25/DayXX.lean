@@ -1,6 +1,6 @@
 import Aoc25.Utils
 
-open System Std.Internal.Parsec.String.Parser
+open System Std.Internal.Parsec.String
 
 namespace DayXX
 
