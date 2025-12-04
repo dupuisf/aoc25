@@ -17,7 +17,7 @@ def parseRotation : Parser Int := do
   if d == 'L' then return -n else return n
 
 def firstPart (input : FilePath) : IO Nat := do
-  let raw : Option (Array Int):= (← IO.FS.lines input).mapM <| fun s => String.parse? s parseRotation
+  let raw : Option (Array Int) := (← IO.FS.lines input).mapM <| fun s => String.parse? s parseRotation
   let some rots := raw | IO.exitWithError "Parse error"
   let mut total := 0
   let mut pos := 50
