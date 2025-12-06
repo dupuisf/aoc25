@@ -146,6 +146,10 @@ def sepByVec (n : Nat) (sep : Parser β) (p : Parser α) (strict : Bool := false
   let some ⟨h⟩ := checkThat acc.size (fun x => x = n) | fail s!"Expected {n} elements"
   return ⟨acc, h⟩
 
+def oneOf (cs : Array Char) : Parser Char := do
+  let c ← any
+  if cs.contains c then return c else failure
+
 end Std.Internal.Parsec.String
 
 namespace Array
