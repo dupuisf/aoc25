@@ -62,6 +62,7 @@ def noop [Monad m] : m Unit := do
 
 end general
 
+/- ## Char -/
 namespace Char
 
 def toNatDigit (c : Char) : Nat :=
@@ -72,6 +73,7 @@ def toNatDigit? (c : Char) : Option Nat :=
 
 end Char
 
+/- ## String -/
 namespace String
 
 def ofCharList (l : List Char) : String :=
@@ -86,6 +88,7 @@ def ofCharArray (a : Array Char) : String := .ofCharList a.toList
 
 end String
 
+/- ## Parser -/
 namespace Std.Internal.Parsec.String
 
 def _root_.String.yoloParse [Inhabited α] (str : String) (p : Parser α) : α :=
@@ -300,6 +303,7 @@ def pad (as : Array α) (n : Nat) (a : α) : Vector α n :=
 
 end Array
 
+/- ## Vector -/
 namespace Vector
 
 def getIntD (v : Vector α n) (i : Int) (d : α) : α :=
@@ -311,6 +315,7 @@ def modify (v : Vector α n) (i : Nat) (f : α → α) : Vector α n := ⟨v.1.m
 
 end Vector
 
+/- ## Array₂ -/
 namespace Array₂
 
 def printBoolGrid (grid : Array₂ Bool) : IO Unit := do
@@ -326,6 +331,7 @@ def printCharGrid (grid : Array₂ Char) : IO Unit := do
 
 end Array₂
 
+/- ## Vector₂ -/
 namespace Vector₂
 
 def set (v : Vector₂ α n m) (i j : Nat) (x : α) (hi : i < n := by get_elem_tactic)
@@ -372,6 +378,12 @@ def findElem [BEq α] (grid : Vector₂ α n m) (a : α) : Option (Nat × Nat) :
     for hx : x in [:m] do
       if grid[y][x] == a then return ⟨y, x⟩
   failure
+
+/-- Here `p` is supposed to parse a whole line. -/
+def getGrid (input : Array String) (p : Std.Internal.Parsec.String.Parser (Array α)) :
+    Option (Σ (n m : Nat), Vector₂ α n m) := do
+  let lines ← input.mapM <| fun s => s.parse? p
+  return (← lines.toVector₂)
 
 end Vector₂
 
